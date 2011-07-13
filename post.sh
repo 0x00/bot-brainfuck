@@ -2,6 +2,9 @@ file=$1
 
 if [ -f "$file" ]; then
 
-cat $file |cut  -d";" -f6 |beef pool.bf  #|sh
+while read line; do
+  echo $line |cut  -d";" -f6 |beef pool.bf | sed "s#=tok#=${token}#g"  |sh
+done<$file
+
 
 fi
